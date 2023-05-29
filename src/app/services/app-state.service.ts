@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { from, map, Observable, shareReplay, switchMap } from 'rxjs';
+import {
+  distinctUntilChanged,
+  from,
+  map,
+  Observable,
+  shareReplay,
+  switchMap,
+} from 'rxjs';
 import { WeatherService } from './weather.service';
 
 @Injectable({
@@ -23,6 +30,9 @@ export class AppStateService {
   );
 
   weatherData$ = this.geoLocatorPermission$.pipe(
+    distinctUntilChanged((previous, current) => {
+      return current.state === 'denied';
+    }),
     switchMap((permission) => {
       switch (permission.state) {
         case 'denied':
