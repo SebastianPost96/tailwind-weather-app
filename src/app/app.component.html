@@ -1,3 +1,9 @@
-<h1 class="text-3xl font-bold underline text-red-500">
-  Hello world!
-</h1>
+<div class="flex h-screen w-screen items-center justify-center bg-blue-0">
+  <app-tab></app-tab>
+  <button (click)="allowGps()">Allow GPS</button>
+  {{(appState.weatherData$ | async)?.city}}
+</div>
+
+
+
+
