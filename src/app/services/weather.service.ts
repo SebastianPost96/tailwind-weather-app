@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { delay, Observable, of } from 'rxjs';
+import { delay, Observable, of, switchMap } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import env from '../../../env';
-import { WeatherByIp } from '../models/weather-by-ip.model';
 import { WeatherData } from '../models/weather-data.model';
+import { WeatherByIp } from '../models/weather-by-ip.model';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +17,8 @@ export class WeatherService {
 
   constructor(private http: HttpClient) {}
 
-  getWeatherByIp(): Observable<WeatherByIp> {
-    return of({
+  getWeatherByIp(): Observable<WeatherData> {
+    const request$ = of<WeatherByIp>({
       ip: '18.197.117.10',
       type: 'ipv4',
       continent_code: 'EU',
@@ -34,19 +34,22 @@ export class WeatherService {
       tz_id: 'Europe/Berlin',
       localtime_epoch: 1685465004,
       localtime: '2023-05-30 18:43',
-    }).pipe(delay(1000));
+    }).pipe(delay(300));
 
-    const params = new HttpParams().append('q', 'auto:ip');
+    // const params = new HttpParams().append('q', 'auto:ip');
+    // const request$ = this.http.get<WeatherByIp>(`${this.url}/ip.json`, {
+    //   headers: this.headers,
+    //   params,
+    // });
 
-    return this.http.get<WeatherByIp>(`${this.url}/ip.json`, {
-      headers: this.headers,
-      params,
-    });
+    return request$.pipe(
+      switchMap(({ lat, lon }) => {
+        return this.getWeatherByLocation(lat, lon);
+      })
+    );
   }
 
-  getWeatherByLocation({
-    coords,
-  }: GeolocationPosition): Observable<WeatherData> {
+  getWeatherByLocation(lat: number, lon: number): Observable<WeatherData> {
     return of({
       location: {
         name: 'Schweinfurt',
@@ -87,9 +90,9 @@ export class WeatherService {
         gust_mph: 15.7,
         gust_kph: 25.2,
       },
-    }).pipe(delay(1000));
+    }).pipe(delay(300));
 
-    const coordinates = [coords.latitude, coords.longitude].toString();
+    const coordinates = [lat, lon].toString();
     const params = new HttpParams().append('q', coordinates);
 
     return this.http.get<WeatherData>(`${this.url}/current.json`, {

@@ -3,7 +3,7 @@
   class="flex h-screen w-screen items-center justify-center bg-blue-0">
   <app-tab></app-tab>
   <button *ngIf="state.geoLocatorPermissions?.state === 'prompt'" (click)="allowGps()">Allow GPS</button>
-  {{state.weatherData?.city}}
+  {{state.weatherData?.location?.name}}
 </div>
 
 

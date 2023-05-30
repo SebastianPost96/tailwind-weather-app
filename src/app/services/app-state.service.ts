@@ -2,7 +2,6 @@ import { Injectable, NgZone } from '@angular/core';
 import {
   distinctUntilChanged,
   from,
-  map,
   Observable,
   shareReplay,
   switchMap,
@@ -44,15 +43,15 @@ export class AppStateService {
               navigator.geolocation.getCurrentPosition(resolve);
             })
           ).pipe(
-            switchMap((position) =>
-              this.weatherService.getWeatherByLocation(position)
+            switchMap(({ coords }) =>
+              this.weatherService.getWeatherByLocation(
+                coords.latitude,
+                coords.longitude
+              )
             )
           );
       }
     }),
-    map((data) => ({
-      city: 'location' in data ? data.location.name : data.city,
-    })),
     shareReplay(0)
   );
 }
