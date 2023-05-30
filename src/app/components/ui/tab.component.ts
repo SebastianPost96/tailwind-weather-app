@@ -5,8 +5,13 @@ import { CommonModule } from '@angular/common';
   selector: 'app-tab',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './tab.component.html',
-  styleUrls: ['./tab.component.scss'],
+  template: `
+    <p>
+      tab works!
+    </p>
+  `,
+  styles: [
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabComponent {

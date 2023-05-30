@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding } from '@angular/core';
 import { AppStateService } from './services/app-state.service';
+import { ResponsivenessService } from './services/responsiveness.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,13 @@ import { AppStateService } from './services/app-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  constructor(public appState: AppStateService) {}
-
-  allowGps() {
-    navigator.geolocation.getCurrentPosition(() => {});
+  @HostBinding('class.dark')
+  get darkMode() {
+    return this.responsive.darkMode();
   }
+
+  constructor(
+    public appState: AppStateService,
+    public responsive: ResponsivenessService
+  ) {}
 }

@@ -3,11 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
-import { TabComponent } from './components/tab/tab.component';
+import { TabComponent } from './components/ui/tab.component';
+import { PanelComponent } from './components/ui/panel.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, TabComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    TabComponent,
+    PanelComponent,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

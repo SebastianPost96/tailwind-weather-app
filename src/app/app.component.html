@@ -1,9 +1,11 @@
 <div
   *ngIf="{geoLocatorPermissions: appState.geoLocatorPermission$ | async, weatherData: appState.weatherData$ | async} as state"
-  class="flex h-screen w-screen items-center justify-center bg-blue-0">
-  <app-tab></app-tab>
-  <button *ngIf="state.geoLocatorPermissions?.state === 'prompt'" (click)="allowGps()">Allow GPS</button>
-  {{state.weatherData?.location?.name}}
+  class="flex h-screen w-screen items-center justify-center bg-blue-200 dark:bg-blue-950 text-black dark:text-white">
+  <app-panel>
+    <app-tab></app-tab>
+    <button (click)="responsive.toggleDarkMode()">Dark Mode</button>
+    {{state.weatherData?.location?.name}}
+  </app-panel>
 </div>
 
 
