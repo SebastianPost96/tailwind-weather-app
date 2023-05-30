@@ -1,10 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AppStateService } from './services/app-state.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-root',
@@ -13,16 +8,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  constructor(public appState: AppStateService, private cd: ChangeDetectorRef) {
-    this.appState.weatherData$.pipe(takeUntilDestroyed()).subscribe(() => {
-      queueMicrotask(() => this.cd.detectChanges());
-    });
-    this.appState.geoLocatorPermission$
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => {
-        queueMicrotask(() => this.cd.detectChanges());
-      });
-  }
+  constructor(public appState: AppStateService) {}
 
   allowGps() {
     navigator.geolocation.getCurrentPosition(() => {});

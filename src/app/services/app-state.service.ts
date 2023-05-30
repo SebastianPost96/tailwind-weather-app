@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import {
   distinctUntilChanged,
   from,
@@ -13,7 +13,7 @@ import { WeatherService } from './weather.service';
   providedIn: 'root',
 })
 export class AppStateService {
-  constructor(private weatherService: WeatherService) {}
+  constructor(private weatherService: WeatherService, private zone: NgZone) {}
 
   geoLocatorPermission$: Observable<PermissionStatus> = new Observable(
     (subscriber) => {
@@ -23,16 +23,16 @@ export class AppStateService {
           subscriber.next(permission);
 
           permission.onchange = () => {
-            subscriber.next(permission);
+            this.zone.run(() => {
+              subscriber.next(permission);
+            });
           };
         });
     }
   );
 
   weatherData$ = this.geoLocatorPermission$.pipe(
-    distinctUntilChanged((previous, current) => {
-      return current.state === 'denied';
-    }),
+    distinctUntilChanged((previous, current) => current.state === 'denied'),
     switchMap((permission) => {
       switch (permission.state) {
         case 'denied':
