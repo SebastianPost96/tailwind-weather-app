@@ -14,8 +14,5 @@ export class AppComponent {
     return this.responsive.darkMode();
   }
 
-  constructor(
-    public appState: AppStateService,
-    public responsive: ResponsivenessService
-  ) {}
+  constructor(public appState: AppStateService, public responsive: ResponsivenessService) {}
 }

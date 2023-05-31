@@ -1,16 +1,16 @@
 <div
-  *ngIf="{geoLocatorPermissions: appState.geoLocatorPermission$ | async, weatherData: appState.weatherData$ | async} as state"
-  class="flex h-screen w-screen items-center justify-center bg-blue-200 dark:bg-blue-950 text-black dark:text-white">
+  *ngIf="{
+    geoLocatorPermissions: appState.geoLocatorPermission$ | async,
+    weatherData: appState.weatherData$ | async
+  } as state"
+  class="flex h-screen w-screen items-center justify-center bg-blue-200 text-black dark:bg-blue-950 dark:text-white"
+>
   <app-panel>
     <app-tabs>
       <app-tab>Tab 1</app-tab>
       <app-tab>Tab 2</app-tab>
     </app-tabs>
     <button (click)="responsive.toggleDarkMode()">Dark Mode</button>
-    {{state.weatherData?.location?.name}}
+    {{ state.weatherData?.location?.name }}
   </app-panel>
 </div>
-
-
-
-
