@@ -23,7 +23,7 @@ import { TabComponent } from './tab.component';
         {{ tab.label }}
       </div>
     </div>
-    <div *ngIf="tabs.get(selectedTab()) as tab">
+    <div class="mt-2 p-3 shadow-inner shadow-panel-border" *ngIf="tabs.get(selectedTab()) as tab">
       <ng-container [ngTemplateOutlet]="tab.template"></ng-container>
     </div>
   `,

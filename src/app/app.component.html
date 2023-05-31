@@ -7,10 +7,11 @@
 >
   <app-panel>
     <app-tabs>
-      <app-tab label="Tab 1">Content 1</app-tab>
-      <app-tab label="Tab 2">Content 2</app-tab>
+      <app-tab label="Today">Content 1</app-tab>
+      <app-tab label="Forecast">Content 2</app-tab>
     </app-tabs>
-    <button (click)="responsive.toggleDarkMode()">Dark Mode</button>
-    {{ state.weatherData?.location?.name }}
   </app-panel>
+
+  <button (click)="responsive.toggleDarkMode()">Dark Mode</button>
+  {{ state.weatherData?.location?.name }}
 </div>
