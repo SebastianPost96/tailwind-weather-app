@@ -14,6 +14,7 @@ import { TabComponent } from './tab.component';
         [class.selected]="selectedTab() === i"
         class="cursor-pointer rounded-t
         px-2 py-0.5
+        shadow-inner shadow-panel-border
         outline-panel-border hover:bg-slate-100 active:outline
         hover:dark:bg-slate-700
         [&.selected]:bg-slate-50
