@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  --panel-bg: theme(colors.slate.200);
+  --panel-border: theme(colors.slate.500);
+
+  .dark {
+    --panel-bg: theme(colors.slate.600);
+    --panel-border: theme(colors.slate.400);
+  }
+}

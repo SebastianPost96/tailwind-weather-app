@@ -7,8 +7,8 @@
 >
   <app-panel>
     <app-tabs>
-      <app-tab>Tab 1</app-tab>
-      <app-tab>Tab 2</app-tab>
+      <app-tab label="Tab 1">Content 1</app-tab>
+      <app-tab label="Tab 2">Content 2</app-tab>
     </app-tabs>
     <button (click)="responsive.toggleDarkMode()">Dark Mode</button>
     {{ state.weatherData?.location?.name }}

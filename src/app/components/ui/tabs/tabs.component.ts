@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ContentChildren, QueryList } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChildren, QueryList, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TabComponent } from './tab.component';
 
@@ -7,10 +7,23 @@ import { TabComponent } from './tab.component';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="flex gap-2 border-b border-current">
-      <div *ngFor="let tab of tabs" class="rounded-t bg-red-500 px-2 py-0.5 ">
-        <ng-container [ngComponentOutlet]="TabComponent" [ngComponentOutletContent]="[[tab.elem.nativeElement]]"></ng-container>
+    <div class="flex gap-2">
+      <div
+        *ngFor="let tab of tabs; let i = index"
+        (click)="selectedTab.set(i)"
+        [class.selected]="selectedTab() === i"
+        class="cursor-pointer rounded-t
+        px-2 py-0.5
+        outline-panel-border hover:bg-slate-100 active:outline
+        hover:dark:bg-slate-700
+        [&.selected]:bg-slate-50
+        [&.selected]:outline [&.selected]:dark:bg-slate-800"
+      >
+        {{ tab.label }}
       </div>
+    </div>
+    <div *ngIf="tabs.get(selectedTab()) as tab">
+      <ng-container [ngTemplateOutlet]="tab.template"></ng-container>
     </div>
   `,
   styles: [],
@@ -20,5 +33,5 @@ export class TabsComponent {
   @ContentChildren(TabComponent)
   tabs!: QueryList<TabComponent>;
 
-  TabComponent = TabComponent;
+  selectedTab = signal(0);
 }
