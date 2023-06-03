@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { AppStateService } from '../../../services/app-state.service';
 import { LocalLinkPipe } from '../../../pipes/local-link.pipe';
+import { ResponsivenessService } from '../../../services/responsiveness.service';
 
 @Component({
   selector: 'app-today',
@@ -12,12 +13,5 @@ import { LocalLinkPipe } from '../../../pipes/local-link.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodayComponent {
-  unitSystem = signal<'metric' | 'imperial'>('metric');
-  now = new Date();
-
-  constructor(public stateService: AppStateService) {}
-
-  toggleUnitSystem() {
-    this.unitSystem.update((val) => (val === 'metric' ? 'imperial' : 'metric'));
-  }
+  constructor(public stateService: AppStateService, public responsive: ResponsivenessService) {}
 }
