@@ -1,14 +1,14 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { BreakpointObserver, Breakpoints, MediaMatcher } from '@angular/cdk/layout';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { AppStateService } from './app-state.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ResponsivenessService {
-  private _darkMode = signal(inject(MediaMatcher).matchMedia('(prefers-color-scheme: dark)').matches);
-  public darkMode = this._darkMode.asReadonly();
+  public darkMode = toSignal(inject(AppStateService).weatherData$.pipe(map((data) => !data.current.is_day)));
 
   public isMobile = toSignal(
     inject(BreakpointObserver)
@@ -17,10 +17,6 @@ export class ResponsivenessService {
   );
 
   unitSystem = signal<'metric' | 'imperial'>('metric');
-
-  toggleDarkMode() {
-    this._darkMode.update((dark) => !dark);
-  }
 
   toggleUnitSystem() {
     this.unitSystem.update((val) => (val === 'metric' ? 'imperial' : 'metric'));
