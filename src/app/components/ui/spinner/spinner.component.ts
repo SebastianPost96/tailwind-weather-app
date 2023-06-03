@@ -1,13 +1,12 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-spinner',
   standalone: true,
-  imports: [CommonModule, NgOptimizedImage],
+  imports: [CommonModule],
   templateUrl: './spinner.component.html',
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SpinnerComponent {
-}
+export class SpinnerComponent {}
