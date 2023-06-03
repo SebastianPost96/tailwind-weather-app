@@ -3,7 +3,8 @@
     <app-panel>
       <app-tabs [contentRight]="locationButton">
         <app-tab label="Weather">
-          <app-today *ngIf="appState.weatherData$ | async as weatherData; else spinner" [weatherData]="weatherData"></app-today>
+          <app-today *ngIf="appState.weatherData$ | async as weatherData; else spinner"
+                     [weatherData]="weatherData"></app-today>
           <ng-template #spinner>
             <app-spinner></app-spinner>
           </ng-template>
@@ -12,14 +13,17 @@
           <app-about></app-about>
         </app-tab>
       </app-tabs>
-      <div class="mt-2 text-red-500" *ngIf="(appState.weatherData$ | async)?.isMock">API offline. Displaying sample data from Frankfurt.</div>
+      <div class="mt-2 text-red-500" *ngIf="(appState.weatherData$ | async)?.isMock">API offline. Displaying sample data
+        from Frankfurt.
+      </div>
     </app-panel>
   </div>
 </div>
 
 <ng-template #locationButton>
   <div class="flex gap-1">
-    <span> {{ (appState.weatherData$ | async)?.location?.name }}</span>
+    <span
+      class="whitespace-nowrap overflow-hidden overflow-ellipsis"> {{ (appState.weatherData$ | async)?.location?.name }}</span>
     <img
       *ngIf="(appState.geoLocatorPermission$ | async)?.state === 'prompt'"
       (click)="askForGPS()"

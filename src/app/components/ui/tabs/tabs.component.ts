@@ -1,6 +1,14 @@
-import { ChangeDetectionStrategy, Component, ContentChildren, Input, QueryList, signal, TemplateRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TabComponent } from './tab.component';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChildren,
+  Input,
+  QueryList,
+  signal,
+  TemplateRef
+} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {TabComponent} from './tab.component';
 
 @Component({
   selector: 'app-tabs',
@@ -22,7 +30,7 @@ import { TabComponent } from './tab.component';
       >
         {{ tab.label }}
       </div>
-      <div *ngIf="contentRight" class="ml-auto">
+      <div *ngIf="contentRight" class="ml-auto overflow-hidden">
         <ng-container *ngTemplateOutlet="contentRight"></ng-container>
       </div>
     </div>
