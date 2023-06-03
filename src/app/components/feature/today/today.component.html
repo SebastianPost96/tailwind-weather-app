@@ -1,1 +1,32 @@
-<p>today works!</p>
+<ng-container *ngIf="stateService.weatherData$ | async as weatherData">
+  <div class="flex items-start">
+    <div class="flex">
+      <img
+        class="m-[-10px] ml-[-15px]"
+        height="64"
+        width="64"
+        [ngSrc]="weatherData.current.condition.icon | localLink"
+        [alt]="weatherData.current.condition.text"
+      />
+      <span class="text-4xl">{{ unitSystem() === "metric" ? weatherData.current.temp_c : weatherData.current.temp_f }}</span>
+      <div class="inline-flex gap-1">
+        <span (click)="toggleUnitSystem()" class="cursor-pointer" [class]="unitSystem() === 'metric' ? 'font-bold' : 'font-light'">°C</span>
+        <span>|</span>
+        <span (click)="toggleUnitSystem()" class="cursor-pointer" [class]="unitSystem() === 'imperial' ? 'font-bold' : 'font-light'">°F</span>
+      </div>
+    </div>
+    <div class="ml-3 inline-flex flex-col">
+      <span class="text-xs"
+        >Precipitation: {{ unitSystem() === "metric" ? weatherData.current.precip_mm + " mm" : weatherData.current.precip_in + " in" }}</span
+      >
+      <span class="text-xs">Humidity: {{ weatherData.current.humidity }}%</span>
+      <span class="text-xs"
+        >Wind: {{ unitSystem() === "metric" ? weatherData.current.wind_kph + " km/h" : weatherData.current.wind_mph + " mph" }}</span
+      >
+    </div>
+    <div class="ml-10 inline-flex flex-col items-end">
+      <span class="leading-none">{{ now | date : (unitSystem() === "metric" ? "EEEE, HH:mm" : "EEEE, hh:mm a") }}</span>
+      <span class="text-sm">{{ weatherData.current.condition.text }}</span>
+    </div>
+  </div>
+</ng-container>

@@ -1,10 +1,4 @@
-<div
-  *ngIf="{
-    geoLocatorPermissions: appState.geoLocatorPermission$ | async,
-    weatherData: appState.weatherData$ | async
-  } as state"
-  class="flex h-screen w-screen items-center justify-center bg-blue-200 text-black dark:bg-blue-950 dark:text-white"
->
+<div class="flex h-screen w-screen items-center justify-center bg-blue-200 text-black dark:bg-blue-950 dark:text-white">
   <app-panel>
     <app-tabs>
       <app-tab label="Today">
@@ -15,7 +9,5 @@
       </app-tab>
     </app-tabs>
   </app-panel>
-
   <button (click)="responsive.toggleDarkMode()">Dark Mode</button>
-  {{ state.weatherData?.location?.name }}
 </div>
