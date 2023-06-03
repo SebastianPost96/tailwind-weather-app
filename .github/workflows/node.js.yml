@@ -18,6 +18,8 @@ jobs:
       - name: Prepare and deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ENVIRONMENT: ${{ secrets.ENVIRONMENT }}
         run: |
           npm install
+          npm run write-env
           npm run ng -- deploy --base-href=/tailwind-weather-app/ --name="SebastianPost96" --email="sebastianpost@online.de" --no-silent

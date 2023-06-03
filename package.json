@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "flat-component": "ng g component --inline-style=true --inline-template=true --flat=true"
+    "flat-component": "ng g component --inline-style=true --inline-template=true --flat=true",
+    "write-env": "node scripts/write-env.js"
   },
   "private": true,
   "dependencies": {
@@ -43,5 +44,6 @@
     "prettier-plugin-tailwindcss": "^0.3.0",
     "tailwindcss": "^3.3.2",
     "typescript": "~5.0.2"
-  }
+  },
+  "type": "module"
 }
