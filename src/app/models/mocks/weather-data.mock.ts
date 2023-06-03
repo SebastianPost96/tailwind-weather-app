@@ -1,0 +1,43 @@
+import { WeatherData } from '../weather-data.model';
+
+export const weatherDataMock: WeatherData = {
+  location: {
+    name: 'Frankfurt Am Main',
+    region: 'Hessen',
+    country: 'Germany',
+    lat: 50.11,
+    lon: 8.68,
+    tz_id: 'Europe/Berlin',
+    localtime_epoch: 1685784660,
+    localtime: '2023-06-03 11:31',
+  },
+  current: {
+    last_updated_epoch: 1685783700,
+    last_updated: '2023-06-03 11:15',
+    temp_c: 19,
+    temp_f: 66.2,
+    is_day: 1,
+    condition: {
+      text: 'Sunny',
+      icon: '//cdn.weatherapi.com/weather/64x64/day/113.png',
+      code: 1000,
+    },
+    wind_mph: 12.5,
+    wind_kph: 20.2,
+    wind_degree: 50,
+    wind_dir: 'NE',
+    pressure_mb: 1019,
+    pressure_in: 30.09,
+    precip_mm: 0,
+    precip_in: 0,
+    humidity: 43,
+    cloud: 0,
+    feelslike_c: 19,
+    feelslike_f: 66.2,
+    vis_km: 10,
+    vis_miles: 6,
+    uv: 6,
+    gust_mph: 10.3,
+    gust_kph: 16.6,
+  },
+};
