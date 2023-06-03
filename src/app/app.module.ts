@@ -7,11 +7,11 @@ import { TabsComponent } from './components/ui/tabs/tabs.component';
 import { PanelComponent } from './components/ui/panel.component';
 import { TabComponent } from './components/ui/tabs/tab.component';
 import { TodayComponent } from './components/feature/today/today.component';
-import { ForecastComponent } from './components/feature/forecast/forecast.component';
+import { AboutComponent } from './components/feature/about/about.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, TabsComponent, PanelComponent, TabComponent, TodayComponent, ForecastComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, TabsComponent, PanelComponent, TabComponent, TodayComponent, AboutComponent],
   providers: [],
   bootstrap: [AppComponent],
 })

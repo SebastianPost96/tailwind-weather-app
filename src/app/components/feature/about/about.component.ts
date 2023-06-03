@@ -2,14 +2,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-forecast',
+  selector: 'app-about',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './forecast.component.html',
+  templateUrl: './about.component.html',
   styles: [
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ForecastComponent {
+export class AboutComponent {
 
 }

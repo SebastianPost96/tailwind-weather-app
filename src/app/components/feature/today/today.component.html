@@ -1,5 +1,5 @@
 <ng-container *ngIf="stateService.weatherData$ | async as weatherData">
-  <div [class.flex-col]="responsive.isMobile()" class="flex justify-between gap-1">
+  <div [class.flex-col]="responsive.isMobile()" class="flex justify-between gap-2">
     <ng-container *ngIf="responsive.isMobile()" [ngTemplateOutlet]="timeAndCondition"></ng-container>
     <div class="flex items-start">
       <div class="flex">
@@ -11,11 +11,12 @@
           [alt]="weatherData.current.condition.text"
         />
         <span class="text-4xl">{{ responsive.unitSystem() === "metric" ? weatherData.current.temp_c : weatherData.current.temp_f }}</span>
-        <div class="inline-flex gap-1">
+        <div class="inline-flex items-start gap-1">
           <span
             (click)="responsive.toggleUnitSystem()"
             class="cursor-pointer"
             [class]="responsive.unitSystem() === 'metric' ? 'font-bold' : 'font-light'"
+            [class.pointer-events-none]="responsive.unitSystem() === 'metric'"
             >°C</span
           >
           <span>|</span>
@@ -23,6 +24,7 @@
             (click)="responsive.toggleUnitSystem()"
             class="cursor-pointer"
             [class]="responsive.unitSystem() === 'imperial' ? 'font-bold' : 'font-light'"
+            [class.pointer-events-none]="responsive.unitSystem() === 'imperial'"
             >°F</span
           >
         </div>
@@ -50,7 +52,7 @@
         'items-center': responsive.isMobile(),
         'ml-5': !responsive.isMobile()
       }"
-      class="inline-flex"
+      class="inline-flex text-end"
     >
       <span class="leading-none">{{
         weatherData.location.localtime | date : (responsive.unitSystem() === "metric" ? "EEEE, HH:mm" : "EEEE, hh:mm a")
