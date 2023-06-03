@@ -10,7 +10,8 @@
           "style": "scss",
           "skipTests": true,
           "changeDetection": "OnPush",
-          "standalone": true
+          "standalone": true,
+          "inlineStyle": true
         },
         "@schematics/angular:service": {
           "skipTests": true

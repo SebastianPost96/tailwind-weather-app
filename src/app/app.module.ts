@@ -6,17 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { TabsComponent } from './components/ui/tabs/tabs.component';
 import { PanelComponent } from './components/ui/panel.component';
 import { TabComponent } from './components/ui/tabs/tab.component';
+import { TodayComponent } from './components/feature/today/today.component';
+import { ForecastComponent } from './components/feature/forecast/forecast.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    TabsComponent,
-    PanelComponent,
-    TabComponent,
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, TabsComponent, PanelComponent, TabComponent, TodayComponent, ForecastComponent],
   providers: [],
   bootstrap: [AppComponent],
 })
