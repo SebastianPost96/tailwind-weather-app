@@ -9,6 +9,7 @@ import { TabComponent } from './components/ui/tabs/tab.component';
 import { TodayComponent } from './components/feature/today/today.component';
 import { AboutComponent } from './components/feature/about/about.component';
 import { NgOptimizedImage } from '@angular/common';
+import { SpinnerComponent } from './components/ui/spinner/spinner.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { NgOptimizedImage } from '@angular/common';
     TodayComponent,
     AboutComponent,
     NgOptimizedImage,
+    SpinnerComponent,
   ],
   providers: [],
   bootstrap: [AppComponent],

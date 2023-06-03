@@ -3,7 +3,10 @@
     <app-panel>
       <app-tabs [contentRight]="locationButton">
         <app-tab label="Weather">
-          <app-today *ngIf="appState.weatherData$ | async as weatherData" [weatherData]="weatherData"></app-today>
+          <app-today *ngIf="appState.weatherData$ | async as weatherData; else spinner" [weatherData]="weatherData"></app-today>
+          <ng-template #spinner>
+            <app-spinner></app-spinner>
+          </ng-template>
         </app-tab>
         <app-tab label="About">
           <app-about></app-about>
