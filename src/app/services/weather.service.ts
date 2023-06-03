@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
-import { catchError, Observable, of, switchMap } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {catchError, Observable, of, switchMap} from 'rxjs';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import env from '../../../env';
-import { WeatherData } from '../models/weather-data.model';
-import { WeatherByIp } from '../models/weather-by-ip.model';
-import { weatherDataMock } from '../models/mocks/weather-data.mock';
-import { weatherByIpMock } from '../models/mocks/weather-by-ip.mock';
+import {WeatherData} from '../models/weather-data.model';
+import {WeatherByIp} from '../models/weather-by-ip.model';
+import {weatherDataMock} from '../models/mocks/weather-data.mock';
+import {weatherByIpMock} from '../models/mocks/weather-by-ip.mock';
+import {withLoadingScreen} from "./responsiveness.service";
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,8 @@ export class WeatherService {
     'X-RapidAPI-Host': env.rapidApiHost,
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getWeatherByIp(): Observable<WeatherData> {
     const params = new HttpParams().append('q', 'auto:ip');
@@ -28,9 +30,10 @@ export class WeatherService {
 
     return request$.pipe(
       catchError(() => of(weatherByIpMock)),
-      switchMap(({ lat, lon }) => {
+      switchMap(({lat, lon}) => {
         return this.getWeatherByLocation(lat, lon);
-      })
+      }),
+      withLoadingScreen()
     );
   }
 
@@ -43,6 +46,6 @@ export class WeatherService {
         headers: this.headers,
         params,
       })
-      .pipe(catchError(() => of(weatherDataMock)));
+      .pipe(catchError(() => of(weatherDataMock)), withLoadingScreen());
   }
 }

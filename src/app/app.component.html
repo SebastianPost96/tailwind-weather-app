@@ -3,7 +3,7 @@
     <app-panel>
       <app-tabs [contentRight]="locationButton">
         <app-tab label="Weather">
-          <app-today *ngIf="appState.weatherData$ | async as weatherData; else spinner"
+          <app-today *ngIf="!responsive.isLoading() && (appState.weatherData$ | async) as weatherData; else spinner"
                      [weatherData]="weatherData"></app-today>
           <ng-template #spinner>
             <app-spinner></app-spinner>
@@ -21,7 +21,7 @@
 </div>
 
 <ng-template #locationButton>
-  <div class="flex gap-1">
+  <div *ngIf="!responsive.isLoading()" class="flex gap-1">
     <span
       class="whitespace-nowrap overflow-hidden overflow-ellipsis"> {{ (appState.weatherData$ | async)?.location?.name }}</span>
     <img
