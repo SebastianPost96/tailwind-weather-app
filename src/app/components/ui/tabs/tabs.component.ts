@@ -16,14 +16,14 @@ import { TabComponent } from './tab.component';
         px-2 py-0.5
         shadow-inner shadow-panel-border
         outline-panel-border hover:bg-slate-100 active:outline
-        hover:dark:bg-slate-700
+        hover:dark:bg-slate-500
         [&.selected]:bg-slate-50
-        [&.selected]:outline [&.selected]:dark:bg-slate-800"
+        [&.selected]:outline [&.selected]:dark:bg-slate-500"
       >
         {{ tab.label }}
       </div>
     </div>
-    <div class="mt-2 p-3 shadow-inner shadow-panel-border" *ngIf="tabs.get(selectedTab()) as tab">
+    <div class="mt-2 rounded p-3 shadow-inner shadow-panel-border" *ngIf="tabs.get(selectedTab()) as tab">
       <ng-container [ngTemplateOutlet]="tab.template"></ng-container>
     </div>
   `,
