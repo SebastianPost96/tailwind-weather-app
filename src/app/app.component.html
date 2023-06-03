@@ -27,7 +27,7 @@
     <img
       *ngIf="(appState.geoLocatorPermission$ | async)?.state === 'prompt'"
       (click)="askForGPS()"
-      class="cursor-pointer"
+      class="cursor-pointer hover:dark:bg-blue-100 hover:bg-blue-500 hover:bg-opacity-10 rounded-3xl"
       height="24"
       width="24"
       ngSrc="assets/gps.svg"
