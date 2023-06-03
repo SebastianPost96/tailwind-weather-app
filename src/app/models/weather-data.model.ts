@@ -38,4 +38,5 @@ export interface WeatherData {
     gust_mph: number;
     gust_kph: number;
   };
+  isMock?: true;
 }

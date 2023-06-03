@@ -9,6 +9,7 @@
           <app-about></app-about>
         </app-tab>
       </app-tabs>
+      <div class="mt-2 text-red-500" *ngIf="(appState.weatherData$ | async)?.isMock">API offline. Displaying sample data from Frankfurt.</div>
     </app-panel>
   </div>
 </div>

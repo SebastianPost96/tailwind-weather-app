@@ -40,4 +40,5 @@ export const weatherDataMock: WeatherData = {
     gust_mph: 10.3,
     gust_kph: 16.6,
   },
+  isMock: true,
 };
