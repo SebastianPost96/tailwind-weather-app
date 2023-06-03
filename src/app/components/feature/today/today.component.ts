@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { AppStateService } from '../../../services/app-state.service';
 import { LocalLinkPipe } from '../../../pipes/local-link.pipe';
 import { ResponsivenessService } from '../../../services/responsiveness.service';
+import { WeatherData } from '../../../models/weather-data.model';
 
 @Component({
   selector: 'app-today',
@@ -13,5 +14,7 @@ import { ResponsivenessService } from '../../../services/responsiveness.service'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodayComponent {
+  @Input() weatherData?: WeatherData;
+
   constructor(public stateService: AppStateService, public responsive: ResponsivenessService) {}
 }

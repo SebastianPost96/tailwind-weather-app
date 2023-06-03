@@ -8,7 +8,7 @@ import { WeatherService } from './weather.service';
 export class AppStateService {
   constructor(private weatherService: WeatherService, private zone: NgZone) {}
 
-  geoLocatorPermission$: Observable<PermissionStatus> = new Observable((subscriber) => {
+  geoLocatorPermission$ = new Observable<PermissionStatus>((subscriber) => {
     navigator.permissions.query({ name: 'geolocation' }).then((permission) => {
       subscriber.next(permission);
 
@@ -18,7 +18,7 @@ export class AppStateService {
         });
       };
     });
-  });
+  }).pipe(shareReplay(0));
 
   weatherData$ = this.geoLocatorPermission$.pipe(
     distinctUntilChanged((previous, current) => current.state === 'denied'),

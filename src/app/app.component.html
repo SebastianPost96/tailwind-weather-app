@@ -1,9 +1,9 @@
 <div class="flex h-screen w-screen justify-center bg-blue-200 text-black dark:bg-blue-950 dark:text-white">
   <div class="mt-5 w-[90vw] max-w-lg">
     <app-panel>
-      <app-tabs>
+      <app-tabs [contentRight]="locationButton">
         <app-tab label="Today">
-          <app-today></app-today>
+          <app-today *ngIf="appState.weatherData$ | async as weatherData" [weatherData]="weatherData"></app-today>
         </app-tab>
         <app-tab label="About">
           <app-about></app-about>
@@ -12,3 +12,18 @@
     </app-panel>
   </div>
 </div>
+
+<ng-template #locationButton>
+  <div class="flex gap-1">
+    <span> {{ (appState.weatherData$ | async)?.location?.name }}</span>
+    <img
+      *ngIf="(appState.geoLocatorPermission$ | async)?.state === 'prompt'"
+      (click)="askForGPS()"
+      class="cursor-pointer"
+      height="24"
+      width="24"
+      ngSrc="assets/gps.svg"
+      alt="location"
+    />
+  </div>
+</ng-template>

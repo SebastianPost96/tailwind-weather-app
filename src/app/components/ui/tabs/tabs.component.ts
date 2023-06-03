@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ContentChildren, QueryList, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChildren, Input, QueryList, signal, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TabComponent } from './tab.component';
 
@@ -22,6 +22,9 @@ import { TabComponent } from './tab.component';
       >
         {{ tab.label }}
       </div>
+      <div *ngIf="contentRight" class="ml-auto">
+        <ng-container *ngTemplateOutlet="contentRight"></ng-container>
+      </div>
     </div>
     <div class="mt-2 rounded p-3 shadow-inner shadow-panel-border" *ngIf="tabs.get(selectedTab()) as tab">
       <ng-container [ngTemplateOutlet]="tab.template"></ng-container>
@@ -31,6 +34,8 @@ import { TabComponent } from './tab.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsComponent {
+  @Input() contentRight?: TemplateRef<unknown>;
+
   @ContentChildren(TabComponent)
   tabs!: QueryList<TabComponent>;
 

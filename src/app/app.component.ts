@@ -15,4 +15,8 @@ export class AppComponent {
   }
 
   constructor(public appState: AppStateService, public responsive: ResponsivenessService) {}
+
+  askForGPS(): void {
+    navigator.geolocation.getCurrentPosition(() => {});
+  }
 }

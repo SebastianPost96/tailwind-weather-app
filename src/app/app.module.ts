@@ -8,10 +8,21 @@ import { PanelComponent } from './components/ui/panel.component';
 import { TabComponent } from './components/ui/tabs/tab.component';
 import { TodayComponent } from './components/feature/today/today.component';
 import { AboutComponent } from './components/feature/about/about.component';
+import { NgOptimizedImage } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, TabsComponent, PanelComponent, TabComponent, TodayComponent, AboutComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    TabsComponent,
+    PanelComponent,
+    TabComponent,
+    TodayComponent,
+    AboutComponent,
+    NgOptimizedImage,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
