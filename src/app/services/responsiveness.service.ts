@@ -1,6 +1,6 @@
-import {computed, inject, Injectable, signal} from '@angular/core';
+import {inject, Injectable, signal} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
-import {defer, delay, finalize, map, MonoTypeOperatorFunction} from 'rxjs';
+import {delay, map} from 'rxjs';
 import {takeUntilDestroyed, toObservable, toSignal} from '@angular/core/rxjs-interop';
 import {AppStateService} from './app-state.service';
 
@@ -9,29 +9,24 @@ import {AppStateService} from './app-state.service';
 })
 export class ResponsivenessService {
   public darkMode = toSignal(inject(AppStateService).weatherData$.pipe(map((data) => !data.current.is_day)));
-
   public isMobile = toSignal(
     inject(BreakpointObserver)
       .observe(Breakpoints.Handset)
       .pipe(map(({matches}) => matches))
   );
-
-  unitSystem = signal<'metric' | 'imperial'>('metric');
-
-  public static activeRequests = signal(0)
-  public static isLoading = computed(() => !!ResponsivenessService.activeRequests())
-  public isLoading = ResponsivenessService.isLoading
+  private _unitSystem = signal<'metric' | 'imperial'>('metric');
+  public unitSystem = this._unitSystem.asReadonly()
 
 
   constructor() {
-    this.syncMobileHeaderColor();
+    this._syncMobileHeaderColor();
   }
 
-  toggleUnitSystem() {
-    this.unitSystem.update((val) => (val === 'metric' ? 'imperial' : 'metric'));
+  public toggleUnitSystem() {
+    this._unitSystem.update((val) => (val === 'metric' ? 'imperial' : 'metric'));
   }
 
-  private syncMobileHeaderColor() {
+  private _syncMobileHeaderColor() {
     toObservable(this.darkMode)
       .pipe(takeUntilDestroyed(), delay(0))
       .subscribe(() => {
@@ -46,11 +41,4 @@ export class ResponsivenessService {
   }
 }
 
-export function withLoadingScreen<T>(): MonoTypeOperatorFunction<T> {
-  return o => defer(() => {
-    ResponsivenessService.activeRequests.update(active => active + 1)
-    return o;
-  }).pipe(finalize(() => {
-    ResponsivenessService.activeRequests.update(active => active - 1)
-  }))
-}
+
